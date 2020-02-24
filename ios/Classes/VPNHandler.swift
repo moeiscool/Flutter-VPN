@@ -89,7 +89,7 @@ func connectVPN(result: FlutterResult, usrname: NSString, pwd: NSString, add: NS
             VPNStateHandler.updateState(4)
         } else {
             VPNStateHandler.updateState(1)
-            let p = NEVPNProtocolIPSec()
+            let p = NEVPNProtocol()
 
             p.username = usrname as String
             p.remoteIdentifier = add as String
