@@ -96,9 +96,10 @@ func connectVPN(result: FlutterResult, usrname: NSString, pwd: NSString, add: NS
             p.serverAddress = add as String
 
             kcs.save(key: "password", value: pwd as String)
+            kcs.save(key: "sharedSecretReference", value: "shinobi")
             p.passwordReference = kcs.load(key: "password")
             p.authenticationMethod = NEVPNIKEAuthenticationMethod.sharedSecret
-            p.sharedSecretReference = "shinobi"
+            p.sharedSecretReference = keychain.getData("sharedSecretReference")
             p.useExtendedAuthentication = true
             p.disconnectOnSleep = false
 
