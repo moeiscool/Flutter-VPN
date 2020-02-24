@@ -89,7 +89,7 @@ func connectVPN(result: FlutterResult, usrname: NSString, pwd: NSString, add: NS
             VPNStateHandler.updateState(4)
         } else {
             VPNStateHandler.updateState(1)
-            let p = NEVPNProtocolIKEv2()
+            let p = NEVPNProtocolIPSec()
 
             p.username = usrname as String
             p.remoteIdentifier = add as String
@@ -97,8 +97,8 @@ func connectVPN(result: FlutterResult, usrname: NSString, pwd: NSString, add: NS
 
             kcs.save(key: "password", value: pwd as String)
             p.passwordReference = kcs.load(key: "password")
-            p.authenticationMethod = NEVPNIKEAuthenticationMethod.none
-
+            p.authenticationMethod = NEVPNIKEAuthenticationMethod.sharedSecret
+            p.sharedSecretReference = "shinobi"
             p.useExtendedAuthentication = true
             p.disconnectOnSleep = false
 
